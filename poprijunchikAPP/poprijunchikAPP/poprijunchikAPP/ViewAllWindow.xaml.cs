@@ -120,5 +120,27 @@ namespace poprijunchikAPP
                 }
             }
         }
+
+        private void AddNewAgent_Click(object sender, RoutedEventArgs e)
+        {
+            SystemContext.isEditing = false;
+            EditingWindow editingWindow = new EditingWindow();
+            this.Close();
+            editingWindow.ShowDialog();
+        }
+
+        private void ChangeAgent_Click(object sender, RoutedEventArgs e)
+        {
+            if (mainDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите пользователя для редактирования");
+                return;
+            }
+            SystemContext.AgentInfo = (AgentInfo)mainDataGrid.SelectedItem;
+            SystemContext.isEditing = true;
+            EditingWindow editingWindow = new EditingWindow();
+            this.Close();
+            editingWindow.ShowDialog();
+        }
     }
 }
