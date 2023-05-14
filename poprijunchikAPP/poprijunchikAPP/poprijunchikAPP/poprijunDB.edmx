@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище poprijunDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgentInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="AgentName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AgentEmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LogoPath" Type="nvarchar(max)" />
+          <Property Name="AgentAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AgentPriority" Type="int" Nullable="false" />
+          <Property Name="Director" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="INN" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="KPP" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AgentInfoID" Type="int" />
+          <Property Name="RealizeDate" Type="datetime" Nullable="false" />
+          <Property Name="ProductCount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AgentInfo__TypeI__38996AB5">
+          <End Role="AgentType" Type="Self.AgentType" Multiplicity="0..1" />
+          <End Role="AgentInfo" Type="Self.AgentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgentInfo">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__AgentIn__3B75D760">
+          <End Role="AgentInfo" Type="Self.AgentInfo" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="AgentInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище poprijunDBModelContainer">
+          <EntitySet Name="AgentInfo" EntityType="Self.AgentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentType" EntityType="Self.AgentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AgentInfo__TypeI__38996AB5" Association="Self.FK__AgentInfo__TypeI__38996AB5">
+            <End Role="AgentType" EntitySet="AgentType" />
+            <End Role="AgentInfo" EntitySet="AgentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__AgentIn__3B75D760" Association="Self.FK__Product__AgentIn__3B75D760">
+            <End Role="AgentInfo" EntitySet="AgentInfo" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="poprijunDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AgentInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="AgentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgentEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LogoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AgentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgentPriority" Type="Int32" Nullable="false" />
+          <Property Name="Director" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INN" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KPP" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AgentType" Relationship="Self.FK__AgentInfo__TypeI__38996AB5" FromRole="AgentInfo" ToRole="AgentType" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__AgentIn__3B75D760" FromRole="AgentInfo" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="AgentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AgentInfo" Relationship="Self.FK__AgentInfo__TypeI__38996AB5" FromRole="AgentType" ToRole="AgentInfo" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgentInfoID" Type="Int32" />
+          <Property Name="RealizeDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AgentInfo" Relationship="Self.FK__Product__AgentIn__3B75D760" FromRole="Product" ToRole="AgentInfo" />
+        </EntityType>
+        <Association Name="FK__AgentInfo__TypeI__38996AB5">
+          <End Role="AgentType" Type="Self.AgentType" Multiplicity="0..1" />
+          <End Role="AgentInfo" Type="Self.AgentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgentInfo">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__AgentIn__3B75D760">
+          <End Role="AgentInfo" Type="Self.AgentInfo" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="AgentInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="poprijunDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AgentInfo" EntityType="Self.AgentInfo" />
+          <EntitySet Name="AgentType" EntityType="Self.AgentType" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <AssociationSet Name="FK__AgentInfo__TypeI__38996AB5" Association="Self.FK__AgentInfo__TypeI__38996AB5">
+            <End Role="AgentType" EntitySet="AgentType" />
+            <End Role="AgentInfo" EntitySet="AgentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__AgentIn__3B75D760" Association="Self.FK__Product__AgentIn__3B75D760">
+            <End Role="AgentInfo" EntitySet="AgentInfo" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище poprijunDBModelContainer" CdmEntityContainer="poprijunDBEntities">
+          <EntitySetMapping Name="AgentInfo">
+            <EntityTypeMapping TypeName="poprijunDBModel.AgentInfo">
+              <MappingFragment StoreEntitySet="AgentInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="AgentEmail" ColumnName="AgentEmail" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+                <ScalarProperty Name="AgentAddress" ColumnName="AgentAddress" />
+                <ScalarProperty Name="AgentPriority" ColumnName="AgentPriority" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="KPP" ColumnName="KPP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentType">
+            <EntityTypeMapping TypeName="poprijunDBModel.AgentType">
+              <MappingFragment StoreEntitySet="AgentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="poprijunDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="AgentInfoID" ColumnName="AgentInfoID" />
+                <ScalarProperty Name="RealizeDate" ColumnName="RealizeDate" />
+                <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

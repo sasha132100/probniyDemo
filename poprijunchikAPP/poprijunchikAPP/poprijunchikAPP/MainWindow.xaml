@@ -1,0 +1,12 @@
+﻿<Window x:Class="poprijunchikAPP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="255" Width="425" Icon="Resources/Попрыженок.ico" MinHeight="175" MinWidth="325">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Width="300">
+            <Image Source="Resources/Попрыженок.png" Width="50" Margin="5"/>
+            <TextBlock FontFamily="Comic Sans MS" Foreground="#43DCFE" Text="Попрыженок" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5"/>
+            <Button Name="startButton" Height="30" Background="#F9969E" Content="Начать взаимодействовать с системой" FontFamily="Comic Sans MS" FontWeight="Bold" Click="startButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

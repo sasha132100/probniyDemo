@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="poprijunDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AgentInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeID" Type="Int32" />
+    <Property Name="AgentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AgentEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LogoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AgentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AgentPriority" Type="Int32" Nullable="false" />
+    <Property Name="Director" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="INN" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KPP" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AgentType" Relationship="Self.FK__AgentInfo__TypeI__38996AB5" FromRole="AgentInfo" ToRole="AgentType" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__AgentIn__3B75D760" FromRole="AgentInfo" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="AgentType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AgentInfo" Relationship="Self.FK__AgentInfo__TypeI__38996AB5" FromRole="AgentType" ToRole="AgentInfo" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AgentInfoID" Type="Int32" />
+    <Property Name="RealizeDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProductCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AgentInfo" Relationship="Self.FK__Product__AgentIn__3B75D760" FromRole="Product" ToRole="AgentInfo" />
+  </EntityType>
+  <Association Name="FK__AgentInfo__TypeI__38996AB5">
+    <End Role="AgentType" Type="Self.AgentType" Multiplicity="0..1" />
+    <End Role="AgentInfo" Type="Self.AgentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AgentInfo">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__AgentIn__3B75D760">
+    <End Role="AgentInfo" Type="Self.AgentInfo" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgentInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="AgentInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="poprijunDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AgentInfo" EntityType="Self.AgentInfo" />
+    <EntitySet Name="AgentType" EntityType="Self.AgentType" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <AssociationSet Name="FK__AgentInfo__TypeI__38996AB5" Association="Self.FK__AgentInfo__TypeI__38996AB5">
+      <End Role="AgentType" EntitySet="AgentType" />
+      <End Role="AgentInfo" EntitySet="AgentInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__AgentIn__3B75D760" Association="Self.FK__Product__AgentIn__3B75D760">
+      <End Role="AgentInfo" EntitySet="AgentInfo" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
