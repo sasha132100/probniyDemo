@@ -125,7 +125,7 @@ GO
 CREATE TABLE [dbo].[Product](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[ProductName] [nvarchar](max) NOT NULL,
-	[AgentInfoID] [int] NULL,
+	[AgentInfoID] [int] NULL ON DELETE CASCADE,
 	[RealizeDate] [datetime] NOT NULL,
 	[ProductCount] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
